@@ -1,3 +1,3 @@
-# coding-tutorial
+# coding-tutorials from QASchool
 
 "# QASchool" 
