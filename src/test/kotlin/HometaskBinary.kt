@@ -4,35 +4,43 @@ import io.kotlintest.specs.DescribeSpec
 class BinarySpec : DescribeSpec({
     describe("Checks for HometaskBinary") {
         context("releaseTesting ") {
-            var a = 110110111L
-            var b = 110110110L
+            var a = arrayOf("110110111","110110110","0","111","11","1","10")
 
             it("Binary to Int checking") {
-                binaryToInt(a) shouldBe 439
-                binaryToInt(0L) shouldBe 0
-                binaryToInt(111L) shouldBe 7
+                binaryToInt(a[0]) shouldBe 439
+                binaryToInt(a[2]) shouldBe 0
+                binaryToInt(a[3]) shouldBe 7
+                binaryToInt(a[4]) shouldBe 3
+                binaryToInt(a[5]) shouldBe 1
+                binaryToInt(a[6]) shouldBe 2
+
             }
             it("Int to Binary checking") {
-                intToBinary(439) shouldBe a
-                intToBinary(0) shouldBe 0L
-                intToBinary(7) shouldBe 111L
+                intToBinary(439) shouldBe 110110111
+                intToBinary(0) shouldBe 0
+                intToBinary(1) shouldBe 1
+                intToBinary(2) shouldBe 10
+                intToBinary(7) shouldBe 111
             }
             it("Sum") {
-                binarySum(a,b) shouldBe 1101101101
-                binarySum(111L,11L) shouldBe 1010
+                binarySum(a[0],a[1]) shouldBe "1101101101"
+                binarySum(a[3],a[4]) shouldBe "1010"
+                binarySum(a[2],a[2]) shouldBe "0"
+                binarySum(a[5],a[6]) shouldBe "11"
+                binarySum(a[2],a[5]) shouldBe "1"
             }
         }
     }
 
 })
 
-fun binarySum(a:Long,b:Long): Long {
+fun binarySum(a:String,b:String): String {
     var sumInt=binaryToInt(a)+binaryToInt(b)
-    return intToBinary(sumInt)
+    return intToBinary(sumInt).toString()
 }
 
-fun binaryToInt(a:Long) :Int {
-    var num = a
+fun binaryToInt(a:String) :Int {
+    var num = a.toLong()
     var decimalNumber = 0
     var i = 0
     var remainder: Long
@@ -51,7 +59,6 @@ fun intToBinary(a:Int):Long{
     var binaryNumber: Long = 0
     var remainder: Int
     var i = 1
-
     while (n != 0) {
         remainder = n % 2
         n /= 2
