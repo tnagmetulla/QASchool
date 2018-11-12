@@ -13,6 +13,10 @@ class BinarySpec : DescribeSpec({
                 binaryToInt(a[4]) shouldBe 3
                 binaryToInt(a[5]) shouldBe 1
                 binaryToInt(a[6]) shouldBe 2
+                binaryToInt("a") shouldBe 0
+                binaryToInt("") shouldBe 0
+
+
 
             }
             it("Int to Binary checking") {
@@ -28,6 +32,7 @@ class BinarySpec : DescribeSpec({
                 binarySum(a[2],a[2]) shouldBe "0"
                 binarySum(a[5],a[6]) shouldBe "11"
                 binarySum(a[2],a[5]) shouldBe "1"
+                binarySum("afaf","") shouldBe "0"
             }
         }
     }
@@ -40,7 +45,11 @@ fun binarySum(a:String,b:String): String {
 }
 
 fun binaryToInt(a:String) :Int {
-    var num = a.toLong()
+    var num:Long
+    try{
+         num = a.toLong()
+    } catch (e: NumberFormatException){ return 0 }
+
     var decimalNumber = 0
     var i = 0
     var remainder: Long
